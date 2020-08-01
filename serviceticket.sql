@@ -96,3 +96,19 @@ SELECT * FROM serviceticket.departamento;
 SELECT * FROM serviceticket.area;
 SELECT * FROM serviceticket.encargado;
 SELECT * FROM serviceticket.requerimiento;
+
+CREATE  OR REPLACE VIEW `consulta` AS
+	SELECT requerimientoID, descripcion, estado, e.areaID, nombreArea, a.departamentoID, nombreDepartamento, d.gerenciaID, nombreGerencia
+    FROM requerimiento r
+	INNER JOIN	encargado AS e
+	ON r.encargadoID = e.encargadoID
+    INNER JOIN area a
+    ON e.areaID = a.areaID
+    INNER JOIN departamento AS d
+    ON a.departamentoID = d.departamentoID
+    INNER JOIN gerencia g
+    ON d.gerenciaID = g.gerenciaID;
+
+SELECT * FROM serviceticket.consulta
+    WHERE gerenciaID = 1 AND departamentoID = 1 AND gerenciaID = 1;
+    
